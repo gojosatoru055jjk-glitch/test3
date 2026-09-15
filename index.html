@@ -1,200 +1,44 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Exchange Table</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 40px;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 28px;
-            color: #000;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            font-size: 20px;
-            padding: 15px;
-            border-bottom: 2px solid #eee;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
-        }
-
-        .currency-pair {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: bold;
-            font-size: 22px;
-        }
-
-        .flag {
-            width: 50px;
-            height: 35px;
-            object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .rate {
-            text-align: right;
-            font-size: 22px;
-            font-weight: 500;
-            padding-right: 40px;
-        }
-
-        .header-pair { text-align: left; padding-left: 65px; }
-        .header-rate { text-align: right; padding-right: 40px; }
-                /* Style cho nút bấm */
-        .fullscreen-btn {
-            padding: 50px 70px;
-            font-size: 50px;
-            font-weight: bold;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: fixed;
-            left: 10%;
-            opacity: 0;
-            transition: ease-in-out 0.5s ;
-        }
-
-        .fullscreen-btn:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-            opacity: 1;
-        }
-
-        .fullscreen-btn:active {
-            transform: scale(0.95);
-        }
-    </style>
+    <title>Document</title>
 </head>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vh;
+    height: 100vw;
+
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+
+}
+
+.container img,
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+</style>
 <body>
-
-<div class="container">
-    <h2>How to Calculate Currency Exchange</h2>
+    <div class="container">
+        <img class="img" src="./image-01.png" alt="">
+    </div>
     
-    <table>
-        <thead>
-            <tr>
-                <th class="header-pair">Currency Pair</th>
-                <th class="header-rate">Exchange Rate</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>    
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/us.svg" class="flag" alt="USD">
-                        USD/EUR
-                    </div>
-                </td>
-                <td class="rate">0,92</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/gb.svg" class="flag" alt="GBP">
-                        GBP/USD
-                    </div>
-                </td>
-                <td class="rate">1,24</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/eu.svg" class="flag" alt="EUR">
-                        EUR/JPY
-                    </div>
-                </td>
-                <td class="rate">162,45</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/ca.svg" class="flag" alt="CAD">
-                        USD/CAD
-                    </div>
-                </td>
-                <td class="rate">1,36</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/au.svg" class="flag" alt="AUD">
-                        AUD/CHF
-                    </div>
-                </td>
-                <td class="rate">0,59</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="currency-pair">
-                        <img src="https://flagcdn.com/jp.svg" class="flag" alt="JPY">
-                        USD/JPY
-                    </div>
-                </td>
-                <td class="rate">148,8</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-    <button id="toggleBtn" class="fullscreen-btn">Full Screen</button>
-
-    <script>
-        const toggleBtn = document.getElementById('toggleBtn');
-
-        toggleBtn.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                // Nếu chưa ở chế độ toàn màn hình, hãy bật nó lên
-                document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Lỗi: Không thể bật chế độ toàn màn hình (${err.message})`);
-                });
-                toggleBtn.innerText = "Exit";
-            } else {
-                // Nếu đang ở chế độ toàn màn hình, hãy thoát ra
-                document.exitFullscreen();
-                toggleBtn.innerText = "Full screen";
-            }
-        });
-
-        // Lắng nghe sự kiện thay đổi trạng thái màn hình để cập nhật chữ trên nút
-        document.addEventListener('fullscreenchange', () => {
-            if (!document.fullscreenElement) {
-                toggleBtn.innerText = "Full screen";
-            }
-        });
-    </script>
-
 </body>
 </html>
